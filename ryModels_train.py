@@ -1,5 +1,9 @@
 '''
-_ry_02_train.py
+date: 2023-05-08
+author: Renyuan Lyu
+
+modified by Joseph Lin
+
 '''
 
 #%%
@@ -129,12 +133,17 @@ val_loader = torch.utils.data.DataLoader(
 
 #%%
 
-#%%
-#
-# Move it out to another file, for both training and testing
-#
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Very Important %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# This part below gets ryM1, ryM2, ryM3, or ryM4 from ryModels.
+# The below 4 lines are how you get to import ryM1, ryM2, ryM3, or ryM4 models, respectively.
+# Only remove the comment indicator in one line at a time, which means that you can only run one model each time.
+# In this case, I removed the comment indicator for ryM3. Therefore, the model that will be trained is ryM3. 
 
-from ryModels import ryM2 as ryM
+# from ryModels import ryM1 as ryM    # only remove the comment indicator in one line.
+# from ryModels import ryM2 as ryM    # only remove the comment indicator in one line.
+from ryModels import ryM3 as ryM      # only remove the comment indicator in one line.
+# from ryModels import ryM4 as ryM    # only remove the comment indicator in one line.
 
 model= ryM(in_chs= 1, out_cls=35)
 
@@ -318,30 +327,9 @@ mdl.load_state_dict(torch.load(path))
 # %%
 # test the model
 mdl.eval()
-
-acc_val= test(mdl, test_or_val='val')
-print(f'Val accuracy: {acc_val:.4f}')
-
 acc_test= test(mdl, test_or_val='test')
 print(f'Test accuracy: {acc_test:.4f}')
+# one-time testing dataset accuracy
 
 
-# %%
-'''
-Test@epoch= 1, acc=【0.8835】, [8818/9981]
-Val accuracy: 0.8835
 
-Test@epoch= 1, acc=【0.8722】, [9599/11005]
-Test accuracy: 0.8722
-'''
-#%%
-#%%
-#### just for fun, test the model on the training set
-acc_train= test(mdl, test_or_val='train')
-print(f'Train accuracy: {acc_train:.4f}')
-'''
-Test@epoch= 1, acc=【0.9596】, [81419/84843]
-Train accuracy: 0.9596
-'''
-
-# %%

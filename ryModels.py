@@ -1,5 +1,10 @@
-#Written originally by Renyuan Lyu, adapted by Joseph Lin
+'''
+date: 2023-05-08
+author: Renyuan Lyu
 
+modified by Joseph Lin
+
+'''
 
 #%%
 import torch
